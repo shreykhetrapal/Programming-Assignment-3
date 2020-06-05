@@ -1,7 +1,7 @@
 best <- function(state,outcome){
   # --------- Checking for valid input in outcome -------
   
-  check <- c("heart attack", "“heart failure", "pneumonia")
+  check <- c("heart attack", "heart failure", "pneumonia")
   if (is.null(outcome)) {
     message("invalid outcome")
   }
@@ -15,8 +15,16 @@ best <- function(state,outcome){
   }
   if (!state %in% stateNames) stop("invalid state")
   
+  # ------ Setting outcome to column names --------
   
+  if(outcome=="heart attack") outcome = statedata$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack
+  if(outcome=="heart failure") outcome = statedata$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure
+  if(outcome=="pneumonia") outcome = statedata$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia
   
   statedata <- split(data1,data1$State)[[state]]
+  
+  best_result <- statedata$Hospital.Name[which.min(as.numeric(outcome))]
+  
+  best_result
   
 }
