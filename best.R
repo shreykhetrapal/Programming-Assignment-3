@@ -16,7 +16,7 @@ best <- function(state,outcome){
   }
   if (!state %in% stateNames) stop("invalid state")
   
-  # ------ Spitting dataframe according to state
+  # ------ Spitting dataframe according to state -------
   
   statedata <- split(data1,data1$State)[[state]]
   
