@@ -38,8 +38,12 @@ rankhospital <- function(state,outcome,num="best"){
   if(num=="best") {
     return(sortedResult <- statedata$Hospital.Name[rank(as.numeric(outcome),ties.method ="first")==1])
   }
+  
+  # VERY IMPORTANT POINT - while ranking values with NA are ranked as 'last' therefore using the max functions returned NA
+  # In rank() use 'na.last=NA' to not calculate ranks for NA
+  # In max use 'na.rm = TRUE'
   if(num=="worst") {
-    num = as.numeric(max(rank(as.numeric(outcome),ties.method = "first")))
+    num = max(rank(as.numeric(outcome),ties.method = "first",na.last = NA),na.rm = TRUE)
     return(sortedResult <- statedata$Hospital.Name[rank(as.numeric(outcome),ties.method ="first")==num])
   }
   
