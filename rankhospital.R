@@ -6,7 +6,7 @@ rankhospital <- function(state,outcome,num="best"){
   
   # --------- Checking for valid input in outcome -------
   
-  check <- c("heart attack", "heart failure")
+  check <- c("heart attack", "heart failure","pneumonia")
   if (is.null(outcome)) {
     message("invalid outcome")
   }
@@ -32,7 +32,7 @@ rankhospital <- function(state,outcome,num="best"){
   
   if(outcome=="heart attack") outcome = statedata$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack
   if(outcome=="heart failure") outcome = statedata$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure
-
+  if(outcome=="pneumonia") outcome = statedata$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia
   # ------ Rank the dataframe and give output ------
   
   if(num=="best") {
